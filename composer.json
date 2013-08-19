@@ -1,0 +1,16 @@
+{
+  "name": "snake-aas/nette-ckeditor",
+  "description": "Implementation of CKEditor WYSIWYG editor as a Nette Framework component",
+  "type": "library",
+  "license": ["MIT"],
+  "authors": [
+    {
+      "name": "Martin Snake.AAS Grossmann",
+      "homepage": "http://vyvoj.net"
+    }
+  ],
+  "require": {
+    "php": ">= 5.3.13",
+    "nette/nette": ">= 2.0.10"
+  }
+}
