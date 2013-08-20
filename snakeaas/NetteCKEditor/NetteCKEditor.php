@@ -17,6 +17,14 @@ use Nette\Application\UI\Form;
  */
 class NetteCKEditor extends Control {
 
+	protected $form;
+
+
+	public function __construct() {
+		$this->form = new Form();
+	}
+
+
 	/**
 	 *  Render a component
 	 */
@@ -30,16 +38,14 @@ class NetteCKEditor extends Control {
 	 * @return Form
 	 */
 	public function createComponentCkeditor() {
-		$form = new Form();
-
-		$form->addTextArea('editor', null, 80, 10)
+		$this->form->addTextArea('editor', null, 80, 10)
 			->setHtmlId('editor');
 
-		$form->addSubmit('send', 'Save');
+		$this->form->addSubmit('send', 'Save');
 
-		$form->onSuccess[] = $this->process;
+		$this->form->onSuccess[] = $this->process;
 
-		return $form;
+		return $this->form;
 	}
 
 
@@ -48,6 +54,10 @@ class NetteCKEditor extends Control {
 	 */
 	public function process(Form $form) {
 
+	}
+
+	public function getForm() {
+		return $this->form;
 	}
 
 } 
