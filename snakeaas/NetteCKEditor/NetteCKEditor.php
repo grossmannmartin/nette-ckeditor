@@ -4,7 +4,7 @@
  * @created 19.8.13 14:46
  */
 
-namespace snakeaas\netteCKEditor;
+namespace snakeaas\NetteCKEditor;
 
 
 use Nette\Application\UI\Control;
@@ -29,7 +29,7 @@ class NetteCKEditor extends Control {
 	/**
 	 * @return Form
 	 */
-	public function createComponentCKEditor() {
+	public function createComponentCkeditor() {
 		$form = new Form();
 
 		$form->addTextArea('editor', null, 80, 10)
