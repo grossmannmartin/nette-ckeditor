@@ -2,7 +2,13 @@
 
 <script src="{$basePath}/ckeditor/ckeditor.js"></script>
 <script>
-	CKEDITOR.replace( 'editor', {
+	CKEDITOR.editorConfig = function (config) {
+
+		{!$config}
+
+	};
+
+	CKEDITOR.replace('editor', {
 
 	});
 </script>

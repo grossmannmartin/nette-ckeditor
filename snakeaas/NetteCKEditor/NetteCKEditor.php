@@ -18,11 +18,13 @@ class NetteCKEditor extends Control {
 
 	protected $form;
 	protected $wwwDir;
+	protected $config;
 
 
 	public function __construct() {
 		$this->form   = new Form();
 		$this->wwwDir = null;
+		$this->config = new Config();
 	}
 
 
@@ -31,6 +33,7 @@ class NetteCKEditor extends Control {
 	 */
 	public function render() {
 		$this->template->setFile(__DIR__ . '/NetteCKEditor.latte');
+		$this->template->config = $this->config->getConfiguration();
 		$this->template->render();
 	}
 
@@ -53,6 +56,14 @@ class NetteCKEditor extends Control {
 	}
 
 
+	/**
+	 * @param Form $form
+	 */
+	public function process(Form $form) {
+
+	}
+
+
 	protected function copyAssets() {
 		if ($this->wwwDir && !file_exists($this->wwwDir . '/ckeditor')) {
 			self::copy(__DIR__ . '/../../ckeditor', $this->wwwDir . '/ckeditor');
@@ -60,11 +71,22 @@ class NetteCKEditor extends Control {
 	}
 
 
-	/**
-	 * @param Form $form
-	 */
-	public function process(Form $form) {
+	static function copy($source, $dest, $overwrite = TRUE) {
+		$dir = opendir($source);
+		@mkdir($dest);
+		while (FALSE !== ($file = readdir($dir))) {
+			if (($file != '.') && ($file != '..')) {
+				if (is_dir($source . '/' . $file)) {
+					self::copy($source . '/' . $file, $dest . '/' . $file);
 
+				} else {
+					if ($overwrite || !file_exists($dest . '/' . $file)) {
+						copy($source . '/' . $file, $dest . '/' . $file);
+					}
+				}
+			}
+		}
+		closedir($dir);
 	}
 
 
@@ -89,22 +111,10 @@ class NetteCKEditor extends Control {
 	}
 
 
-
-	static function copy($source, $dest, $overwrite = true) {
-		$dir = opendir($source);
-		@mkdir($dest);
-		while(false !== ($file = readdir($dir))) {
-			if (($file != '.') && ($file != '..')) {
-				if(is_dir($source . '/' . $file)) {
-					self::copy($source . '/' . $file, $dest . '/' . $file);
-
-				} else {
-					if($overwrite || !file_exists($dest . '/' . $file)) {
-						copy($source . '/' . $file, $dest . '/' . $file);
-					}
-				}
-			}
-		}
-		closedir($dir);
+	/**
+	 * @return Config
+	 */
+	public function getConfig() {
+		return $this->config;
 	}
 }
