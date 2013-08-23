@@ -2,13 +2,11 @@
 
 <script src="{$basePath}/ckeditor/ckeditor.js"></script>
 <script>
-	CKEDITOR.editorConfig = function (config) {
 
-		{!$config}
-
-	};
+	{!$config}
 
 	CKEDITOR.replace('editor', {
+		customConfig: '',
 		"extraPlugins": "imagebrowser",
 		"imageBrowser_listUrl": {link GetJsonImageList}
 	});

@@ -63,7 +63,7 @@ class Config extends Object {
 		$return = '';
 
 		foreach ($this->data as $key => $value) {
-			$return .= "config.$key = " . json_encode($value) . ';';
+			$return .= "CKEDITOR.config.$key = " . json_encode($value) . ';';
 		}
 
 		return $return;
