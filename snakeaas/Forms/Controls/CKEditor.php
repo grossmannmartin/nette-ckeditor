@@ -74,24 +74,25 @@ class CKEditor extends TextArea {
 		}
 
 		foreach ($html->getImages() as $image) {
-			list($width, $height) = $image->getDimensionsFromStyle();
+			if ($image->getDimensionsFromStyle() !== NULL) {
+				list($width, $height) = $image->getDimensionsFromStyle();
 
-			$newFilename = preg_replace('~(.*)\.(\w+)~i', '${1}[' . $width . 'x' . $height . '].${2}',
-										$image->getSrc()->getFilename());
+				$newFilename = preg_replace('~(.*)\.(\w+)~i', '${1}[' . $width . 'x' . $height . '].${2}',
+											$image->getSrc()->getFilename());
 
 
-			$newSrc = $image->getSrc()->getPathinfo()->getPath() . '/' . self::TEMP_DIR_NAME . '/' . $newFilename;
+				$newSrc = $image->getSrc()->getPathinfo()->getPath() . '/' . self::TEMP_DIR_NAME . '/' . $newFilename;
 
-			$imFile = realpath($this->publicDir . DIRECTORY_SEPARATOR . $image->getSrc()->getFilename());
+				$imFile = realpath($this->publicDir . DIRECTORY_SEPARATOR . $image->getSrc()->getFilename());
 
-			if ($imFile !== FALSE) {
-				$im = Image::fromFile($imFile);
-				// TODO: resize only if image is larger than real dimensions
-				$im->resize($width, $height);
-				if ($im->save($this->tempDir . DIRECTORY_SEPARATOR . $newFilename)) {
-					$image->setSrc($newSrc);
+				if ($imFile !== FALSE) {
+					$im = Image::fromFile($imFile);
+					// TODO: resize only if image is larger than real dimensions
+					$im->resize($width, $height);
+					if ($im->save($this->tempDir . DIRECTORY_SEPARATOR . $newFilename)) {
+						$image->setSrc($newSrc);
+					}
 				}
-
 			}
 		}
 

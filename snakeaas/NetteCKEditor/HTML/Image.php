@@ -37,6 +37,10 @@ class Image {
 	public function getDimensionsFromStyle() {
 		$style = $this->image->getAttribute('style');
 
+		if (!$style) {
+			return NULL;
+		}
+		
 		preg_match('~^\s*.*height\s*:\s*(\d+)\s*px.*\s*$~iU', $style, $matches);
 		$height = $matches[1];
 
