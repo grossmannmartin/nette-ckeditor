@@ -4,12 +4,12 @@
  * @created 20.8.13 12:30
  */
 
-namespace snakeaas\NetteCKEditor;
+namespace snakeaas\Forms\Controls;
 
 
 use Nette\Object;
 
-class Config extends Object {
+class CKEditorConfig extends Object {
 
 	protected $data;
 
@@ -63,10 +63,10 @@ class Config extends Object {
 		$return = '';
 
 		foreach ($this->data as $key => $value) {
-			$return .= "config.$key = " . json_encode($value) . ';';
+			$return .= "CKEDITOR.config.$key = " . json_encode($value) . ';';
 		}
 
 		return $return;
 	}
 
-} 
+}
