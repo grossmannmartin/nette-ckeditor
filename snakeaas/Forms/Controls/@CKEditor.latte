@@ -1,0 +1,21 @@
+{control $form}
+
+{foreach $form->controls as $input}
+	{if isset($input->config)}
+		{var $editors[] = $input}
+	{/if}
+{/foreach}
+
+<script src="{$basePath}/ckeditor/ckeditor.js"></script>
+<script>
+	{foreach $editors as $editor}
+		{!$editor->config->getConfiguration()}
+
+		CKEDITOR.replace({$editor->name}, {
+			"customConfig": "",
+			"extraPlugins": "imagebrowser",
+			"imageBrowser_listUrl": {link GetJsonImageList}
+		});
+	{/foreach}
+
+</script>
