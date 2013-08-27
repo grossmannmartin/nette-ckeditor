@@ -16,6 +16,7 @@ class Extension {
 		Container::extensionMethod('addCKEditor', function (Container $container, $name, $label = NULL, $rows = NULL, $cols = NULL) use ($wwwDir) {
 			return $container[$name] = new CKEditor($label, $rows, $cols, $wwwDir);
 		});
+
 	}
 
 } 
