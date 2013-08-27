@@ -12,5 +12,8 @@
   "require": {
     "php": ">= 5.3.13",
     "nette/nette": ">= 2.0.10"
+  },
+  "autoload": {
+    "psr-0": {"snakeaas\\Forms": ""}
   }
 }
