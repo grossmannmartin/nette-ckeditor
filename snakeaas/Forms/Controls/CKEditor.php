@@ -190,7 +190,7 @@ class CKEditor extends TextArea {
 		$targetDir = $this->wwwDir . '/ckeditor';
 
 		if (!file_exists($targetDir) && is_writable($this->wwwDir)) {
-			self::copy(__DIR__ . '/../../ckeditor', $targetDir);
+			self::copy(__DIR__ . '/../../../ckeditor', $targetDir);
 		}
 	}
 
